@@ -29,9 +29,6 @@ ActiveRecord::Schema.define(version: 20180404193942) do
 
   create_table "institutions", force: :cascade do |t|
     t.string "name"
-    t.string "primary_contact"
-    t.string "email"
-    t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_institutions_on_name"
