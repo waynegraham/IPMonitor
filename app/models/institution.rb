@@ -1,3 +1,4 @@
 class Institution < ApplicationRecord
-  has_many: grants
+  validates :name, presence: true
+  has_many :grants
 end

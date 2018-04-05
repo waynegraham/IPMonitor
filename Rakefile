@@ -4,3 +4,12 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+begin
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+rescue LoadError
+  task :rubocop do
+    raise 'Unable to load rubocop'
+  end
+end
