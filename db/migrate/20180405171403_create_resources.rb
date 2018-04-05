@@ -7,6 +7,7 @@ class CreateResources < ActiveRecord::Migration[5.1]
       t.string :slug
       t.boolean :active
       t.string :access
+      t.integer :pings_count
       t.references :grant, foreign_key: true
 
       t.timestamps

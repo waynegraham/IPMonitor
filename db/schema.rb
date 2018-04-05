@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405171403) do
+ActiveRecord::Schema.define(version: 20180405173301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,7 @@ ActiveRecord::Schema.define(version: 20180405171403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "grant_title"
-    t.integer "ping_count"
-    t.integer "resource_count"
+    t.integer "resources_count"
     t.index ["institution_id"], name: "index_grants_on_institution_id"
   end
 
@@ -48,6 +47,15 @@ ActiveRecord::Schema.define(version: 20180405171403) do
     t.index ["name"], name: "index_institutions_on_name"
   end
 
+  create_table "pings", force: :cascade do |t|
+    t.boolean "status"
+    t.boolean "latest"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_id"], name: "index_pings_on_resource_id"
+  end
+
   create_table "resources", force: :cascade do |t|
     t.string "file_name"
     t.string "url"
@@ -55,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180405171403) do
     t.string "slug"
     t.boolean "active"
     t.string "access"
+    t.integer "pings_count"
     t.bigint "grant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,5 +71,6 @@ ActiveRecord::Schema.define(version: 20180405171403) do
   end
 
   add_foreign_key "grants", "institutions"
+  add_foreign_key "pings", "resources"
   add_foreign_key "resources", "grants"
 end
