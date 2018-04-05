@@ -16,6 +16,11 @@ RSpec.describe Grant, type: :model do
     expect(grant).to_not be_valid
   end
 
+  it 'is not valid without a grant_title' do
+    grant = build(:grant, grant_title: nil)
+    expect(grant).to_not be_valid
+  end
+
   it 'is not valid without a primary_contact' do
     grant = build(:grant, primary_contact: nil)
     expect(grant).to_not be_valid
