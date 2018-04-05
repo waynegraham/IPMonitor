@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405170913) do
+ActiveRecord::Schema.define(version: 20180405171403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,5 +48,19 @@ ActiveRecord::Schema.define(version: 20180405170913) do
     t.index ["name"], name: "index_institutions_on_name"
   end
 
+  create_table "resources", force: :cascade do |t|
+    t.string "file_name"
+    t.string "url"
+    t.string "checksum"
+    t.string "slug"
+    t.boolean "active"
+    t.string "access"
+    t.bigint "grant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grant_id"], name: "index_resources_on_grant_id"
+  end
+
   add_foreign_key "grants", "institutions"
+  add_foreign_key "resources", "grants"
 end

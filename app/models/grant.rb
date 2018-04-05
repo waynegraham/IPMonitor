@@ -5,4 +5,5 @@ class Grant < ApplicationRecord
   validates :email, presence: true
 
   belongs_to :institution
+  has_many :resource
 end
