@@ -1,0 +1,41 @@
+<div class="container">
+
+  <h1><%= @grants.first.institution.name %></h1>
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>CLIR Grant Number</th>
+        <th>Primary Contact</th>
+        <!-- <th>Institution</th> -->
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Number of Resources</th>
+        <th>Status #</th>
+        <th>Status %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @grants.each do |grant| %>
+      <tr>
+        <td><%= link_to grant.grant_number, grant %></td>
+        <td><%= link_to grant.primary_contact, grant %></td>
+        <!-- <td><%= link_to grant.institution.name, grant.institution  %></td> -->
+        <td><%= mail_to grant.email %></td>
+        <td><%= grant.phone %></td>
+        <td><%= number_with_delimiter(grant.resources.length) %></td>
+        <td><%#= format_status_num(grant.status) %></td>
+        <td><%#= format_status_percent(grant.status, grant.resources.length) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td><%#= number_with_delimiter(Institution.find(params[:id]).resources_count) %></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </table>
+
+  </div>
