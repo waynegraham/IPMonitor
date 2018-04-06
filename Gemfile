@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap', '~> 4.0.0'
+gem 'font-awesome-sass', '~> 5.0.9'
 gem 'friendly_id'
 gem 'net-ping'
 gem 'nokogiri', '~> 1.8'

@@ -7,7 +7,7 @@ class CreateStatuses < ActiveRecord::Migration[5.1]
       t.text :status
       t.text :submitted_query
       t.boolean :latest
-      t.references :resources, foreign_key: true
+      t.references :resource, foreign_key: true
 
       t.timestamps
     end

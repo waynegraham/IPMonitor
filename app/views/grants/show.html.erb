@@ -1,2 +1,32 @@
-<h1>Grants#show</h1>
-<p>Find me in app/views/grants/show.html.erb</p>
+<div class="container">
+  <div class="alert alert-info">
+    This page only shows actively monitored resources.
+  </div>
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Resource Name</th>
+        <th>Access</th>
+        <th>Checksum</th>
+        <th>Access</th>
+        <th>Recent Status</th>
+        <th>Last Check</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @resources.each do |resource| %>
+        <tr>
+          <td><%= link_to content_tag(:span, '', class: 'fa fa-wrench'), { controller: 'resources', action: 'check_status', id: resource.id }, data: {no_turbolink: true}, target: '_blank', title: 'Check Status' %></td>
+          <td><%= link_to resource.file_name, resource.url %></td>
+          <td><%= resource.access %></td>
+          <td><%= resource.checksum %></td>
+          <td><%= resource.access %></td>
+          <td><%= latest_status(resource) %></td>
+          <td><%= recent_status(resource) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

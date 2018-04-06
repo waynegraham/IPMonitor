@@ -1,2 +1,48 @@
-<h1>Grants#index</h1>
-<p>Find me in app/views/grants/index.html.erb</p>
+<div class="container">
+  <div class="alert alert-info">
+    This page only shows actively monitored resources.
+  </div>
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr>
+        <th>Grant Number</th>
+        <th>Institution</th>
+        <th>Number of Resources</th>
+        <th>Status #</th>
+        <th>Status %<th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @grants.each do |grant| %>
+        <tr>
+          <td><%= link_to grant.grant_number, grant %></td>
+          <td><%= grant.institution.name %></td>
+          <td><%= grant.resources.count %></td>
+          <td><%= number_with_delimiter(Resource.where(active: true).count) %></td>
+          <td><%= format_status_num(grant.overall_status) %> </td>
+          <td><%= format_status_percent(grant.overall_status, grant.resource_count)%> </td>
+        </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <td>&nbsp;</td>
+        <td>totals:</td>
+        <td><%= number_with_delimiter(Resource.where(active: true).count) %></td>
+        <td><%= number_with_delimiter(Status.latest.active.distinct(:resource_id).count) %></td>
+        <td><%= number_to_percentage((Status.latest.active.distinct(:resource_id).count.to_f/Resource.all.count.to_f)*100, precision: 1) %></td>
+      </tfoot>
+    </table>
+
+    <table class="table table-responsive lead">
+      <tr>
+        <th>Current checked:</th>
+        <td><%= format_status_num(Status.latest.active.status_groups.count) %></td>
+      </tr>
+      <tr>
+        <th>Availability:</th>
+        <td><%= format_status_percent(Status.latest.active.status_groups.count, Status.latest.count) %></td>
+      </tr>
+    </table>
+
+  </div>

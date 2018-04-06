@@ -84,6 +84,8 @@ GEM
     ffi (1.9.23-java)
     ffi (1.9.23-x64-mingw32)
     ffi (1.9.23-x86-mingw32)
+    font-awesome-sass (5.0.9)
+      sass (>= 3.2)
     friendly_id (5.2.3)
       activerecord (>= 4.0.0)
     globalid (0.4.1)
@@ -251,6 +253,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   factory_bot_rails
   faker
+  font-awesome-sass (~> 5.0.9)
   friendly_id
   jbuilder (~> 2.5)
   jquery-rails

@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20180405210432) do
     t.string "url"
     t.string "checksum"
     t.string "slug"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.string "access"
     t.integer "pings_count"
     t.bigint "grant_id"
@@ -77,14 +77,14 @@ ActiveRecord::Schema.define(version: 20180405210432) do
     t.text "status"
     t.text "submitted_query"
     t.boolean "latest"
-    t.bigint "resources_id"
+    t.bigint "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resources_id"], name: "index_statuses_on_resources_id"
+    t.index ["resource_id"], name: "index_statuses_on_resource_id"
   end
 
   add_foreign_key "grants", "institutions"
   add_foreign_key "pings", "resources"
   add_foreign_key "resources", "grants"
-  add_foreign_key "statuses", "resources", column: "resources_id"
+  add_foreign_key "statuses", "resources"
 end

@@ -1,5 +1,8 @@
+require 'net/http'
+# require 'rest_client'
+
 class Status < ApplicationRecord
-  belongs_to :resources, counter_cache: true, touch: true
+  belongs_to :resource, counter_cache: true, touch: true
 
   def self.run_check(resource)
 
@@ -14,7 +17,7 @@ class Status < ApplicationRecord
   end
 
   def self.active
-    joins(:resource).where(resource: {active: true})
+    joins(:resource).where(resources: {active: true})
   end
 
   def grant
