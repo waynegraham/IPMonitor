@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405173301) do
+ActiveRecord::Schema.define(version: 20180405210432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,21 @@ ActiveRecord::Schema.define(version: 20180405173301) do
     t.index ["grant_id"], name: "index_resources_on_grant_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "res_code"
+    t.string "res_message"
+    t.decimal "res_time"
+    t.text "status"
+    t.text "submitted_query"
+    t.boolean "latest"
+    t.bigint "resources_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resources_id"], name: "index_statuses_on_resources_id"
+  end
+
   add_foreign_key "grants", "institutions"
   add_foreign_key "pings", "resources"
   add_foreign_key "resources", "grants"
+  add_foreign_key "statuses", "resources", column: "resources_id"
 end
