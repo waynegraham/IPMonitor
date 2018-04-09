@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180405210432) do
     t.boolean "active", default: true
     t.string "access"
     t.integer "pings_count"
+    t.integer "statuses_count"
     t.bigint "grant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

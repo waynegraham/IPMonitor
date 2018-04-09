@@ -33,13 +33,18 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-sass', '~> 5.0.9'
 gem 'friendly_id'
+gem 'kaminari'
 gem 'net-ping'
 gem 'nokogiri', '~> 1.8'
 gem 'jquery-rails'
 gem 'whenever', :require => false
+gem 'rest-client'
+gem 'faraday'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,13 +1,14 @@
 class ResourcesController < ApplicationController
   def index
-    @resources = Resource.all().includes(:statuses)
-    render 'hosts/show'
+    @resources = Resource.all.includes(:statuses)
+    render 'resources/show'
   end
 
   def check_status
     @resource = Resource.find_by id: params[:id]
-    @status = Status.run_check(@resource)
-    render json: @resource.statuses.last.to_json.force_encoding('UTF-8')
+    @status = Status.run_check(@resource) unless @resource.nil?
+    render json: @status.inspect
+    # render json: @resource.statuses.last.to_json.force_encoding('UTF-8')
   end
 
   def show

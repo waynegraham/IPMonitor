@@ -1,11 +1,15 @@
 require 'net/http'
-# require 'rest_client'
+require 'rest_client'
+require 'ipmonitor'
 
 class Status < ApplicationRecord
   belongs_to :resource, counter_cache: true, touch: true
 
   def self.run_check(resource)
-
+    IPMonitor::Tools.verbose_sleep(rand(1..5))
+    # IPMonitor.logger.info "self.resource #{self.inspect}"
+    client = IPMonitor::Client.new(resource)
+    response = client.create_response
   end
 
   def self.status_groups
@@ -17,7 +21,7 @@ class Status < ApplicationRecord
   end
 
   def self.active
-    joins(:resource).where(resources: {active: true})
+    joins(:resource).where(resources: { active: true })
   end
 
   def grant
